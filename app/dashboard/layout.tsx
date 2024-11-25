@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import Logo from "@/public/logo.svg";
 import Image from "next/image";
-import { DashboardItems } from "@/app/components/dashboard/DashboardItems";
+import { DashboardItems } from "../components/dashboard/DashboardItems";
 import { CircleUser, DollarSign, Globe, Home } from "lucide-react";
-import { ThemeToggle } from "@/app/components/dashboard/ThemeToggle";
+import { ThemeToggle } from "../components/dashboard/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <Image src={Logo} alt="Logo" className="size-8" />
 
               <h3 className="text-2xl">
-                Blog<span className="text-primary">Maker</span>
+                Blog<span className="text-primary">Marshal</span>
               </h3>
             </Link>
           </div>
