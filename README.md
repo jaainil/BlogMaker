@@ -4,12 +4,12 @@ A full-stack SaaS platform that allows users to create and manage their blogs ea
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14 with App Router, React, TypeScript
+- **Frontend**: Next.js 15 with App Router, React, TypeScript
 - **Styling**: Tailwind CSS, Shadcn UI
 - **Authentication**: Kinde Auth
 - **Database**: PostgreSQL with Prisma ORM
 - **Payment Processing**: Stripe
-- **Image Storage**: Cloudinary
+- **Image Storage**: UploadThing
 - **Deployment**: Vercel
 
 ## Environment Variables
