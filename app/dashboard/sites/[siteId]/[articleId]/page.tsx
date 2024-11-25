@@ -27,17 +27,12 @@ async function getData(postId: string) {
   return data;
 }
 
-interface PageProps {
-  params: {
-    articleId: string;
-    siteId: string;
-  };
-  searchParams?: Record<string, string | string[] | undefined>;
-}
-
-export default async function ArticlePage({ params, searchParams }: PageProps) {
+export default async function EditRoute({
+  params,
+}: {
+  params: { articleId: string; siteId: string };
+}) {
   const data = await getData(params.articleId);
-
   return (
     <div>
       <div className="flex items-center">

@@ -10,17 +10,11 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-interface PageProps {
-  params: {
-    siteId: string;
-    articleId: string;
-  };
-  searchParams?: Record<string, string | string[] | undefined>;
-}
-
-export default async function DeletePage({ params, searchParams }: PageProps) {
-  const resolvedParams = await params;
-
+export default function DeleteForm({
+  params,
+}: {
+  params: { siteId: string; articleId: string };
+}) {
   return (
     <div className="flex flex-1 items-center justify-center">
       <Card className="max-w-xl">
@@ -33,17 +27,11 @@ export default async function DeletePage({ params, searchParams }: PageProps) {
         </CardHeader>
         <CardFooter className="w-full flex justify-between">
           <Button variant="secondary" asChild>
-            <Link href={`/dashboard/sites/${resolvedParams.siteId}`}>
-              Cancel
-            </Link>
+            <Link href={`/dashboard/sites/${params.siteId}`}>Cancel</Link>
           </Button>
           <form action={DeletePost}>
-            <input
-              type="hidden"
-              name="articleId"
-              value={resolvedParams.articleId}
-            />
-            <input type="hidden" name="siteId" value={resolvedParams.siteId} />
+            <input type="hidden" name="articleId" value={params.articleId} />
+            <input type="hidden" name="siteId" value={params.siteId} />
             <SubmitButton variant="destructive" text="Delete Article" />
           </form>
         </CardFooter>

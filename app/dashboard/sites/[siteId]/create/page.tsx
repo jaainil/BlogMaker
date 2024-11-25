@@ -26,13 +26,11 @@ import { toast } from "sonner";
 import slugify from "react-slugify";
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
 
-interface PageProps {
-  params: {
-    siteId: string;
-  };
-}
-
-export default function ArticleCreationRoute({ params }: PageProps) {
+export default function ArticleCreationRoute({
+  params,
+}: {
+  params: { siteId: string };
+}) {
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
   const [value, setValue] = useState<JSONContent | undefined>(undefined);
   const [slug, setSlugValue] = useState<undefined | string>(undefined);
