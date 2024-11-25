@@ -33,7 +33,9 @@ interface PageProps {
     slug: string;
     name: string;
   }>;
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams:
+    | Promise<Record<string, string | string[] | undefined>>
+    | undefined;
 }
 
 export default async function SlugRoute({ params, searchParams }: PageProps) {
