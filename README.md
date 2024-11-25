@@ -1,4 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# BlogMaker - Next.js Blog Creation Platform
+
+A full-stack SaaS platform that allows users to create and manage their blogs easily.
+
+## Tech Stack
+
+- **Frontend**: Next.js 14 with App Router, React, TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI
+- **Authentication**: Kinde Auth
+- **Database**: PostgreSQL with Prisma ORM
+- **Payment Processing**: Stripe
+- **Image Storage**: Cloudinary
+- **Deployment**: Vercel
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Database
+DATABASE_URL="postgresql://..."
+
+# Authentication (Kinde)
+KINDE_CLIENT_ID=""
+KINDE_CLIENT_SECRET=""
+KINDE_ISSUER_URL=""
+KINDE_SITE_URL=""
+KINDE_POST_LOGOUT_REDIRECT_URL=""
+KINDE_POST_LOGIN_REDIRECT_URL=""
+
+# Stripe
+STRIPE_SECRET_KEY=""
+STRIPE_WEBHOOK_SECRET=""
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+
+# uploadthing
+UPLOADTHING_SECRET=""
+UPLOADTHING_APP_ID=""
+```
 
 ## Getting Started
 
