@@ -28,22 +28,23 @@ async function getData(slug: string) {
   return data;
 }
 
-type PageProps = {
-  params: {
+interface PageProps {
+  params: Promise<{
     slug: string;
     name: string;
-  };
-  searchParams: Record<string, string | string[] | undefined>;
-};
+  }>;
+  searchParams?: Record<string, string | string[] | undefined>;
+}
 
 export default async function SlugRoute({ params, searchParams }: PageProps) {
-  const data = await getData(params.slug);
+  const resolvedParams = await params;
+  const data = await getData(resolvedParams.slug);
 
   return (
     <>
       <div className="flex items-center gap-x-3 pt-10 pb-5">
         <Button size="icon" variant="outline" asChild>
-          <Link href={`/blog/${params.name}`}>
+          <Link href={`/blog/${resolvedParams.name}`}>
             <ArrowLeft className="size-4" />
           </Link>
         </Button>
