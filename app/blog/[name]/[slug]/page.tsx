@@ -28,11 +28,15 @@ async function getData(slug: string) {
   return data;
 }
 
-export default async function SlugRoute({
-  params,
-}: {
-  params: { slug: string; name: string };
-}) {
+type PageProps = {
+  params: {
+    slug: string;
+    name: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function SlugRoute({ params, searchParams }: PageProps) {
   const data = await getData(params.slug);
 
   return (
