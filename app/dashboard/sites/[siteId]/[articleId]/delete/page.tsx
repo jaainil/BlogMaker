@@ -11,11 +11,11 @@ import {
 import Link from "next/link";
 
 interface PageProps {
-  params: Promise<{
+  params: {
     siteId: string;
     articleId: string;
-  }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+  };
+  searchParams?: Record<string, string | string[] | undefined>;
 }
 
 export default async function DeletePage({ params, searchParams }: PageProps) {
