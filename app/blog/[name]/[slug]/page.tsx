@@ -7,6 +7,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JSONContent } from "novel";
 
+type PageProps = {
+  params: {
+    slug: string;
+    name: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 async function getData(slug: string) {
   const data = await prisma.post.findUnique({
     where: {
@@ -28,23 +36,14 @@ async function getData(slug: string) {
   return data;
 }
 
-interface PageProps {
-  params: Promise<{
-    slug: string;
-    name: string;
-  }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}
-
 export default async function SlugRoute({ params, searchParams }: PageProps) {
-  const resolvedParams = await params;
-  const data = await getData(resolvedParams.slug);
+  const data = await getData(params.slug);
 
   return (
     <>
       <div className="flex items-center gap-x-3 pt-10 pb-5">
         <Button size="icon" variant="outline" asChild>
-          <Link href={`/blog/${resolvedParams.name}`}>
+          <Link href={`/blog/${params.name}`}>
             <ArrowLeft className="size-4" />
           </Link>
         </Button>

@@ -14,13 +14,6 @@ import Defaultimage from "@/public/default.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-interface PageProps {
-  params: Promise<{
-    name: string;
-  }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}
-
 async function getData(subDir: string) {
   const data = await prisma.site.findUnique({
     where: {
@@ -51,9 +44,12 @@ async function getData(subDir: string) {
   return data;
 }
 
-export default async function BlogPage({ params, searchParams }: PageProps) {
-  const resolvedParams = await params;
-  const data = await getData(resolvedParams.name);
+export default async function BlogIndexPage({
+  params,
+}: {
+  params: { name: string };
+}) {
+  const data = await getData(params.name);
   return (
     <>
       <nav className="grid grid-cols-3 my-10">
@@ -87,7 +83,7 @@ export default async function BlogPage({ params, searchParams }: PageProps) {
 
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href={`/blog/${resolvedParams.name}/${item.slug}`}>
+                <Link href={`/blog/${params.name}/${item.slug}`}>
                   Read more
                 </Link>
               </Button>

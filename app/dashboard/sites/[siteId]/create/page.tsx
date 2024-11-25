@@ -26,15 +26,11 @@ import { toast } from "sonner";
 import slugify from "react-slugify";
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
 
-interface PageProps {
-  params: Promise<{
-    siteId: string;
-  }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}
-
-export default async function ArticleCreationRoute({ params }: PageProps) {
-  const resolvedParams = await params;
+export default function ArticleCreationRoute({
+  params,
+}: {
+  params: { siteId: string };
+}) {
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
   const [value, setValue] = useState<JSONContent | undefined>(undefined);
   const [slug, setSlugValue] = useState<undefined | string>(undefined);
@@ -66,7 +62,7 @@ export default async function ArticleCreationRoute({ params }: PageProps) {
     <>
       <div className="flex items-center">
         <Button size="icon" variant="outline" className="mr-3" asChild>
-          <Link href={`/dashboard/sites/${resolvedParams.siteId}`}>
+          <Link href={`/dashboard/sites/${params.siteId}`}>
             <ArrowLeft className="size-4" />
           </Link>
         </Button>
@@ -87,7 +83,7 @@ export default async function ArticleCreationRoute({ params }: PageProps) {
             onSubmit={form.onSubmit}
             action={action}
           >
-            <input type="hidden" name="siteId" value={resolvedParams.siteId} />
+            <input type="hidden" name="siteId" value={params.siteId} />
             <div className="grid gap-2">
               <Label>Title</Label>
               <Input
