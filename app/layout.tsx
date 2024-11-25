@@ -31,7 +31,6 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-          suppressHydrationWarning
         >
           {children}
           <Toaster richColors closeButton />
