@@ -1,23 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-    connectionTimeout: 20,
-    pool: {
-      maxWaitingClients: 50,
-      maxUses: 100,
-    },
-  });
+  return new PrismaClient();
 };
 
-declare global {
-  var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>;
-}
+declare const globalThis: {
+  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
+} & typeof global;
 
 const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
 
