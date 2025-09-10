@@ -19,6 +19,7 @@ Create a `.env` file in the root directory with the following variables:
 ```env
 # Database
 DATABASE_URL="postgresql://..."
+DIRECT_URL="postgresql://..."
 
 # Authentication (Kinde)
 KINDE_CLIENT_ID=""
@@ -38,9 +39,65 @@ UPLOADTHING_SECRET=""
 UPLOADTHING_APP_ID=""
 ```
 
+## Database Setup
+
+This project uses Prisma ORM with PostgreSQL. Before running the application, you need to set up the database and run migrations.
+
+### Prerequisites
+
+1. Ensure you have a PostgreSQL database running
+2. Update the `DATABASE_URL` and `DIRECT_URL` in your `.env` file with your database credentials
+
+### Running Migrations
+
+If you're setting up the project for the first time or encounter database-related errors (like "table does not exist"), follow these steps:
+
+1. **Check if migrations exist**:
+
+   ```bash
+   ls prisma/migrations
+   ```
+
+2. **If no migrations exist, create the initial migration**:
+
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+3. **Generate Prisma client**:
+
+   ```bash
+   npx prisma generate
+   ```
+
+4. **Verify database sync** (optional):
+   ```bash
+   npx prisma db push
+   ```
+
+### Common Database Issues
+
+If you encounter errors like:
+
+- `The table 'public.Site' does not exist in the current database`
+- `PrismaClientKnownRequestError`
+
+This typically means:
+
+1. Your Prisma schema defines models that don't exist in the database yet
+2. The `DIRECT_URL` environment variable might be missing from your `.env` file
+3. Migrations haven't been run
+
+**Solution**: Run the migration steps above to create all necessary tables including:
+
+- `User`
+- `Site`
+- `Post`
+- `Subscription`
+
 ## Getting Started
 
-First, run the development server:
+First, ensure your database is set up and migrations are run, then start the development server:
 
 ```bash
 npm run dev
