@@ -31,15 +31,16 @@ async function getData(slug: string) {
 export default async function SlugRoute({
   params,
 }: {
-  params: { slug: string; name: string };
+  params: Promise<{ slug: string; name: string }>;
 }) {
-  const data = await getData(params.slug);
+  const { slug, name } = await params;
+  const data = await getData(slug);
 
   return (
     <>
       <div className="flex items-center gap-x-3 pt-10 pb-5">
         <Button size="icon" variant="outline" asChild>
-          <Link href={`/blog/${params.name}`}>
+          <Link href={`/blog/${name}`}>
             <ArrowLeft className="size-4" />
           </Link>
         </Button>

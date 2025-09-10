@@ -30,21 +30,22 @@ async function getData(postId: string) {
 export default async function EditRoute({
   params,
 }: {
-  params: { articleId: string; siteId: string };
+  params: Promise<{ articleId: string; siteId: string }>;
 }) {
-  const data = await getData(params.articleId);
+  const { articleId, siteId } = await params;
+  const data = await getData(articleId);
   return (
     <div>
       <div className="flex items-center">
         <Button size="icon" variant="outline" asChild className="mr-3">
-          <Link href={`/dashboard/sites/${params.siteId}`}>
+          <Link href={`/dashboard/sites/${siteId}`}>
             <ArrowLeft className="size-4" />
           </Link>
         </Button>
         <h1 className="text-2xl font-semibold">Edit Article</h1>
       </div>
 
-      <EditArticleForm data={data} siteId={params.siteId} />
+      <EditArticleForm data={data} siteId={siteId} />
     </div>
   );
 }

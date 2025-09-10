@@ -47,9 +47,10 @@ async function getData(subDir: string) {
 export default async function BlogIndexPage({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }) {
-  const data = await getData(params.name);
+  const { name } = await params;
+  const data = await getData(name);
   return (
     <>
       <nav className="grid grid-cols-3 my-10">
@@ -83,7 +84,7 @@ export default async function BlogIndexPage({
 
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href={`/blog/${params.name}/${item.slug}`}>
+                <Link href={`/blog/${name}/${item.slug}`}>
                   Read more
                 </Link>
               </Button>
