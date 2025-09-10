@@ -9,8 +9,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:password@db:5432/blogmaker
-      - DIRECT_URL=postgresql://postgres:password@db:5432/blogmaker
+      - DATABASE_URL=postgresql://blogger:blogger@test-blogger-kpguqn:5432/blogger
+      - DIRECT_URL=postgresql://blogger:blogger@test-blogger-kpguqn:5432/blogger
       # Add other environment variables as needed
       # - NEXTAUTH_URL=http://localhost:3000
       # - NEXTAUTH_SECRET=your-secret-here
@@ -29,9 +29,9 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_DB=blogmaker
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=blogger
+      - POSTGRES_USER=blogger
+      - POSTGRES_PASSWORD=blogger
     ports:
       - "5432:5432"
     volumes:
