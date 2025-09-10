@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:password@db:5432/blogmaker
+      - DIRECT_URL=postgresql://postgres:password@db:5432/blogmaker
+      # Add other environment variables as needed
+      # - NEXTAUTH_URL=http://localhost:3000
+      # - NEXTAUTH_SECRET=your-secret-here
+      # - KINDE_CLIENT_ID=your-kinde-client-id
+      # - KINDE_CLIENT_SECRET=your-kinde-client-secret
+      # - KINDE_ISSUER_URL=your-kinde-issuer-url
+      # - STRIPE_SECRET_KEY=your-stripe-secret-key
+      # - STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+      # - UPLOADTHING_SECRET=your-uploadthing-secret
+      # - UPLOADTHING_APP_ID=your-uploadthing-app-id
+    depends_on:
+      - db
+    volumes:
+      - ./prisma:/app/prisma
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=blogmaker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
